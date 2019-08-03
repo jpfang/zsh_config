@@ -38,20 +38,28 @@ installOhMyZsh()
 
 installPowerLevel9kTheme()
 {
-    theme="$(pwd)/.oh-my-zsh/custom/themes/powerlevel9k"
+    theme="$(pwd)/themes/powerlevel9k"
 
     if [ ! -d "${theme}" ]; then
         git clone https://github.com/bhilburn/powerlevel9k.git "${theme}"
     fi
+
+    ohMyZshCustom="$(pwd)/.oh-my-zsh/custom/themes"
+    mkdir -p "${ohMyZshCustom}"
+    ln -s "${theme}" "${ohMyZshCustom}/$(basename ${theme})"
 }
 
 installZshHighLight()
 {
-    plugin="$(pwd)/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+    plugin="$(pwd)/plugins/zsh-syntax-highlighting"
 
     if [ ! -d "${plugin}" ]; then
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${plugin}"
     fi
+
+    ohMyZshPlugins="$(pwd)/.oh-my-zsh/plugins"
+    mkdir -p "${ohMyZshPlugins}"
+    ln -s "${plugin}" "${ohMyZshPlugins}/$(basename ${plugin})"
 }
 
 checkEnv "zsh"
